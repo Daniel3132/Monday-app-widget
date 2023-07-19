@@ -1,0 +1,41 @@
+.traffic_light{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: black;
+  height: 20rem;
+  width: 10rem;
+  padding: 2rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid white;
+}
+
+.traffic_light section {
+  width: 5.5rem;
+  height: 5.5rem;
+  border-radius: 100%;
+  border: 1px solid black;
+}
+
+.green {
+  background-color: green;
+}
+
+.amber {
+  background-color: yellow;
+}
+
+.red {
+  background-color: red;
+}
+
+.active {
+  filter: brightness(200%);
+  transform: scale(1.1);
+}
+
+.inactive {
+  filter: brightness(50%);
+}
+
