@@ -3,16 +3,15 @@ class TokenManagerService {
     this.monday = monday;
   }
 
-  async checkFileExists() {
+  async getTokenFromJSON() {
     try {
       const tokenData = await import("../token.json");
-      return tokenData.token || '';
+      return tokenData.token;
     } catch (error) {
       console.error('Error reading token from file:', error.message);
-      return '';
     }
   }
-  
+
   setTokenInMonday(token) {
     if (token && typeof token === 'string') {
       this.monday.setToken(token);
@@ -23,7 +22,7 @@ class TokenManagerService {
 
   async processToken() {
     try {
-      const token = await this.checkFileExists();
+      const token = await this.getTokenFromJSON();
       if (token) {
         this.setTokenInMonday(token);
       } else {
