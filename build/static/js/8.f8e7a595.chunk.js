@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmonday_react_quickstart_app=self.webpackChunkmonday_react_quickstart_app||[]).push([[8],{8:function(t){t.exports={token:""}}}]);

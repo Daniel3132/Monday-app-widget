@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import mondaySdk from "monday-sdk-js";
 import "monday-ui-react-core/dist/main.css";
-import { token } from "./helpers/token";
-import TrafficLight from "./components/TrafficLight";
+import TokenManagerService from "./services/TokenManagerService";
 
 const monday = mondaySdk();
-monday.setToken(token);
+const tokenManager = new TokenManagerService(monday);
 
 const App = () => {
   const [board, setBoardId] = useState();
@@ -21,7 +20,7 @@ const App = () => {
         }
       }`)
       .then((res) => {
-        const boardID = res.data.boards[0].id;
+        const boardID = res?.data?.boards[0].id;
         setBoardId(boardID);
       })
       .catch((error) => {
@@ -72,7 +71,12 @@ const App = () => {
   };
 
   useEffect(() => {
-    getBoardId();
+    const fetchData = async () => {
+      await tokenManager.processToken();
+      getBoardId();
+    };
+
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -81,6 +85,7 @@ const App = () => {
       getItems();
     }
   }, [board]);
+
 
   return (
     <div className="App">
@@ -112,8 +117,6 @@ const App = () => {
           ))}
         </ul>
       </div>
-
-      {/* <TrafficLight status={80} /> */}
     </div>
   );
 };
